@@ -13,6 +13,9 @@ def main():
         conn, addr = s.accept()
         with conn:
             while True:
+                data = conn.recv(1024)
+                if not data:
+                    break
                 conn.sendall(b"+PONG\r\n")
 
 
