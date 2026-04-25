@@ -12,7 +12,8 @@ def main():
 
         conn, addr = s.accept()
         with conn:
-            conn.sendall(b"+PONG\r\n")
+            while True:
+                conn.sendall(b"+PONG\r\n")
 
 
 if __name__ == "__main__":
