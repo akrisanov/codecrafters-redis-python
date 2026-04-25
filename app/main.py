@@ -1,9 +1,18 @@
 import socket
 
 
+HOST = "localhost"
+PORT = 6379
+
+
 def main():
-    server_socket = socket.create_server(("localhost", 6379), reuse_port=True)
-    server_socket.accept()  # wait for client
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.bind((HOST, PORT))
+        s.listen()
+
+        conn, addr = s.accept()
+        with conn:
+            conn.sendall(b"+PONG\r\n")
 
 
 if __name__ == "__main__":
